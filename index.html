@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Password Generator</title>
+    <!-- Include the Material Design Lite library -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <!-- Add the material dark theme -->
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.dark.min.css" />
+  </head>
+  <body class="mdl-theme--dark">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <h1>Password Generator</h1>
+    <p>Use the slider to adjust the length of the password and check the boxes to include different types of characters.</p>
+    <form>
+      <label for="length">Password Length:</label>
+      <input type="range" min="8" max="128" value="8" id="length">
+      <br>
+      <input type="checkbox" id="include-lowercase">
+      <label for="include-lowercase">Include lowercase letters</label>
+      <br>
+      <input type="checkbox" id="include-uppercase">
+      <label for="include-uppercase">Include uppercase letters</label>
+      <br>
+      <input type="checkbox" id="include-numbers">
+      <label for="include-numbers">Include numbers</label>
+      <br>
+      <input type="checkbox" id="include-symbols">
+      <label for="include-symbols">Include symbols</label>
+    </form>
+    <br>
+    <button onclick="generatePassword()">Generate Password</button>
+    <br>
+    <br>
+    <p>Generated password:</p>
+    <p id="password"></p>
+    <script>
+      function generatePassword() {
+        // Get the password length from the slider
+        var length = document.getElementById("length").value;
+        // Initialize the password string
+        var password = "";
+        // Get the character sets to use
+        var lowercase = "abcdefghijklmnopqrstuvwxyz";
+        var uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        var numbers = "0123456789";
+        var symbols = "!@#$%^&*()_+-=[]{}|;':,.<>?";
+        // Initialize the character set string
+        var characters = "";
+        // Check which character sets to include
+        if (document.getElementById("include-lowercase").checked) {
+          characters += lowercase;
+        }
+        if (document.getElementById("include-uppercase").checked) {
+          characters += uppercase;
+        }
+        if (document.getElementById("include-numbers").checked) {
+          characters += numbers;
+        }
+        if (document.getElementById("include-symbols").checked) {
+          characters += symbols;
+        }
+        // Generate the password
+        for (var i = 0; i < length; i++) {
+          password += characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+        // Display the password
+        document.getElementById("password").innerHTML = password;
+      }
+    </script>
+  </body>
+</html>
